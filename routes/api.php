@@ -33,3 +33,10 @@ Route::delete('evenement/{evenement}', [EvenementController::class, 'destroy']);
 Route::put('evenement/archive/{evenement}', [EvenementController::class, 'archive']);
 Route::get('evenement/EvenementArchive', [EvenementController::class, 'EvenementArchive']);
 
+
+//Pour les articles
+Route::get('articles', [ArticleController::class, 'index']);
+Route::get('articlesArchives', [ArticleController::class, 'articlesArchives']);
+Route::post('articles/create', [ArticleController::class, 'store']);
+Route::put('articles/edit/{article}', [ArticleController::class, 'update']);
+Route::delete('articles/{article}', [ArticleController::class, 'destroy']);
