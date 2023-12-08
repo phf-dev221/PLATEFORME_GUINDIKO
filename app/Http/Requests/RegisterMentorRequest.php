@@ -28,8 +28,8 @@ class RegisterMentorRequest extends FormRequest
             'photo_profil'=>'required|image|max:2000|mimes:jpeg,png,jpg',
             'password'=>'required|regex:/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!])(.{8,})$/',
             'telephone' =>'required|regex:/^7[0-9]{8}$/|unique:mentors,telephone',
-            'specialite'=>'required',
-            'nombre_annee_experience'=>'required'
+            'nombre_annee_experience'=>'required',
+            'articles_id' => 'required',
         ];
     }
 
@@ -57,7 +57,7 @@ class RegisterMentorRequest extends FormRequest
             'telephone.unique'=>'le numéro telephone est deja utilisé',
             'telephone.regex'=>'le format du numéro de téléphone est incorrect',
             'nombre_annee_experience.required'=>'le nombre d\'année d\'expérience est requis est requis',
-
+            'articles_id.required'=>'article ne peut pas être null'
         ];
     }
 

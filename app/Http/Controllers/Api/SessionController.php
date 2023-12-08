@@ -8,6 +8,7 @@ use App\Http\Requests\EditSessionRequest;
 use App\Models\Session;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
@@ -58,10 +59,12 @@ class SessionController extends Controller
 
     public function store(CreateSessionRequest $request, Session $session)
     {
+        dd($request);
         try {
-            $session->date_evenement = $request->date_evenement;
-            $session->lieu = $request->lieu;
-            $session->theme_evenement = $request->theme_evenement;
+            // dd(Auth::user());
+            $session->users_id = $request->users_id;
+            $session->mentors_id = Auth::guard('mentor')->user();
+            $session->theme = $request->theme;
             $session->save();
             return response()->json([
                 'status_code' => 200,

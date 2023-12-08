@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\articles;
+namespace App\Http\Controllers\Api;
 
 use Exception;
 use App\Models\Mentor;
@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\LoginMentorRequest;
 use App\Http\Requests\RegisterMentorRequest;
+use App\Models\User;
 
 class MentorController extends Controller
 {
@@ -22,6 +23,7 @@ class MentorController extends Controller
             $user->telephone = $request->telephone;
             $user->nombre_annee_experience = $request->nombre_annee_experience;
             $user->email = $request->email;
+            $user->articles_id = $request->articles_id;
             $user->password = Hash::make($request->password);
 
             if ($request->hasFile('photo_profil')) {
@@ -80,7 +82,6 @@ class MentorController extends Controller
     public function logout()
     {
         try {
-            dd(Auth::user()->check());
             if (Auth::guard('mentor')->check()){
                 Auth::guard('mentor')->logout();
     
@@ -108,5 +109,99 @@ class MentorController extends Controller
 
     }
     
-   
+    public function index()
+    {
+        try {
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => 'Voici la liste de tous les mentors',
+                'Mentor' => Mentor::all(),
+            ]); 
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+// Method pour lister les mentors dont leurs état d'archive est false
+    public function non_archive(Mentor $mentor)
+    {
+        try {
+            if ($mentor->est_archive == 0) {
+                return response()->json([
+                    'status_code' => 200,
+                    'status_message' => 'Voici la liste des mentors non archivés',
+                    'mentor' => Mentor::where('est_archive',0)->get(),
+                ]); 
+            }
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    // Method pour lister les user dont leurs état d'archive est true
+    public function est_archive(Mentor $mentor)
+    {
+        try {
+            if ($mentor->est_archive == 0) {
+                return response()->json([
+                    'status_code' => 200,
+                    'status_message' => 'Voici la liste des mentors qui sont archivés',
+                    'mentor' => Mentor::where('est_archive', 1)->get(),
+                ]); 
+            }
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    //Liste des users qui ont des etats non archive et qui n'ont pas atteint leurs limite max de mentorés
+    public function nombre_mentor(Mentor $mentor)
+    {
+        try {
+            if ($mentor->est_archive == 0) {
+                if ($mentor->nombre_mentores < 16) {
+                    return response()->json([
+                        'status_code' => 200,
+                        'status_message' => 'Voici la liste des mentors qui n\'ont pas atteint la limite et qui ne sont pas archivés',
+                        'mentor' => Mentor::where('nombre_mentores','<', 16)->get(),
+                    ]); 
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    //Cette methode permet de lister les mentors qui ont atteint leurs limite de mentorés mais ils ne sont pas archivés
+    public function nombre_mentor_atteint(Mentor $mentor)
+    {
+        try {
+            if ($mentor->est_archive == 0) {
+                if ($mentor->nombre_mentores > 16) {
+                    return response()->json([
+                        'status_code' => 200,
+                        'status_message' => 'Voici la liste des mentors qui n\'ont pas atteint la limite et qui ne sont pas archivés',
+                        'mentor' => Mentor::where('nombre_mentores' ,'>', 16)->get(),
+                    ]); 
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    public function archive (Mentor $mentor)
+    {
+        try {
+            $mentor->update([
+                'est_archive'=> 1
+            ]);
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => "Vous avez archivés ce mentor"
+            ]); 
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
 }

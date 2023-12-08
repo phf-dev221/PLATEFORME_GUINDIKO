@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('mentors_id');
             $table->unsignedBigInteger('users_id');
-            $table->string('lieu')->nullable();
-            $table->string('en_ligne')->nullable();
+            $table->string('en_ligne');
             $table->string('theme');
             $table->boolean('est_archive')->default(false);
             $table->string('libelle');
