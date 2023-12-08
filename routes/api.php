@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EvenementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SessionController;
@@ -24,4 +25,11 @@ Route::post('session/create', [SessionController::class, 'store']);
 Route::put('session/edit/{session}', [SessionController::class, 'update']);
 Route::delete('session/{session}', [SessionController::class, 'destroy']);
 Route::put('session/archive', [SessionController::class, 'archive']);
-Route::get('session/sessionArchive', [SessionController::class, 'sessionArchive']);
+Route::get('session/sessionArchive', [SessionController::class, 'sessionArchive']);//Pour les événements
+Route::get('evenement', [EvenementController::class, 'index']);
+Route::post('evenement/create', [EvenementController::class, 'store']);
+Route::put('evenement/edit/{evenement}', [EvenementController::class, 'update']);
+Route::delete('evenement/{evenement}', [EvenementController::class, 'destroy']);
+Route::put('evenement/archive/{evenement}', [EvenementController::class, 'archive']);
+Route::get('evenement/EvenementArchive', [EvenementController::class, 'EvenementArchive']);
+
