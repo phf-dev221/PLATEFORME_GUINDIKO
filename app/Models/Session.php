@@ -18,4 +18,14 @@ class Session extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    protected $fillabe=[
+        'mentors_id',
+        'users_id',
+        'lieu',
+        'en_ligne',
+        'theme',
+        'est_archive',
+        'libelle',
+    ];
 }
