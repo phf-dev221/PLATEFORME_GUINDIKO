@@ -134,3 +134,22 @@ Did you mean one of these?
 #33 /home/ben/Bureau/MyOwnApi/MyOwnApi/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #34 {main}
 "} 
+[2023-12-08 07:14:03] local.ERROR: The provided cwd "/home/ben/Bureau/MyOwnApi/MyOwnApi/public" does not exist. {"exception":"[object] (Symfony\\Component\\Process\\Exception\\RuntimeException(code: 0): The provided cwd \"/home/ben/Bureau/MyOwnApi/MyOwnApi/public\" does not exist. at /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/symfony/process/Process.php:343)
+[stacktrace]
+#0 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Foundation/Console/ServeCommand.php(143): Symfony\\Component\\Process\\Process->start()
+#1 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Foundation/Console/ServeCommand.php(110): Illuminate\\Foundation\\Console\\ServeCommand->startProcess()
+#2 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Foundation\\Console\\ServeCommand->handle()
+#3 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#4 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#5 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#6 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Container/Container.php(662): Illuminate\\Container\\BoundMethod::call()
+#7 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Console/Command.php(211): Illuminate\\Container\\Container->call()
+#8 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/symfony/console/Command/Command.php(326): Illuminate\\Console\\Command->execute()
+#9 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Console/Command.php(181): Symfony\\Component\\Console\\Command\\Command->run()
+#10 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/symfony/console/Application.php(1096): Illuminate\\Console\\Command->run()
+#11 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#12 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#13 /home/ben/Bureau/MyOwnApi/MyOwnApi/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run()
+#14 /home/ben/Bureau/MyOwnApi/MyOwnApi/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#15 {main}
+"} 
