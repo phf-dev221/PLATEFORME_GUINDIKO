@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\ArticleController;
-use App\Http\Controllers\Api\EvenementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\SessionController;
+use App\Http\Controllers\Api\EvenementController;
+use App\Http\Controllers\Api\articles\UserController;
+use App\Http\Controllers\Api\articles\MentorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +47,44 @@ Route::get('articlesArchives', [ArticleController::class, 'articlesArchives']);
 Route::post('articles/create', [ArticleController::class, 'store']);
 Route::put('articles/edit/{article}', [ArticleController::class, 'update']);
 Route::delete('articles/{article}', [ArticleController::class, 'destroy']);
+
+
+/*routes auth*/
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    dd(Auth::guard('mentor')->check());
+    return $request->user();
+});
+
+Route::middleware('auth:sanctum')->get('/mentor', function (Request $request) {
+    return 'bnjr';
+});
+
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
+
+
+Route::post('registerMentor', [MentorController::class, 'registerMentor']);
+
+Route::post('login', [MentorController::class, 'login']);
+
+
+Route::post('logout', [MentorController::class, 'logout']);
+
+
+Route::middleware(['auth:sanctum', 'acces:mentor'])->group(function () {
+    /*routes d'acces pour mentors*/
+    
+});
+
+Route::middleware(['auth:sanctum', 'acces:user'])->group(function () {
+    /*routes d'acces pour mentorés*/
+    Route::post('logoutUser', [UserController::class, 'logoutUser']);
+
+});
+
+Route::middleware(['auth:sanctum', 'acces:admin'])->group(function () {
+    /*routes d'acces pour admin*/
+    /*routes de basse*/
+ 
+
+});
