@@ -26,7 +26,10 @@ Route::post('session/create', [SessionController::class, 'store']);
 Route::put('session/edit/{session}', [SessionController::class, 'update']);
 Route::delete('session/{session}', [SessionController::class, 'destroy']);
 Route::put('session/archive', [SessionController::class, 'archive']);
-Route::get('session/sessionArchive', [SessionController::class, 'sessionArchive']);//Pour les événements
+Route::get('session/sessionArchive', [SessionController::class, 'sessionArchive']);
+
+
+//Pour les événements
 Route::get('evenement', [EvenementController::class, 'index']);
 Route::post('evenement/create', [EvenementController::class, 'store']);
 Route::put('evenement/edit/{evenement}', [EvenementController::class, 'update']);
