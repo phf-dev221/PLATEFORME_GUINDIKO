@@ -11,17 +11,49 @@ use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
-    public function index()
+    public function index(Session $session)
     {
         try {
+            if ($session->est_archive == 0) {
                 return response()->json([
                     'status_code' => 200,
-                    'status_message' => 'Voici la liste des sessions',
-                    'session' => Session::all(),
+                    'status_message' => 'Voici la liste des sessions non archivés',
+                    'session' => Session::where('est_archive', 0)->get(),
                 ]); 
+            }
         } catch (Exception $e) {
             return response()->json($e);
         }
+    }
+
+    public function archive(Session $session)
+    {
+        try {
+            $session->update([
+                "est_archive"=>1,
+            ]);
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => 'Vous avez archivés cette sessions',
+            ]);
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    public function sessionArchive(Session $session)
+    {
+        try {
+            if ($session->est_archive == 1) {
+                return response()->json([
+                    'status_code' => 200,
+                    'status_message' => 'Voici la liste des sessions archivés',
+                    'session' => Session::where('est_archive', 1)->get(),
+                ]); 
+            }
+    } catch (Exception $e) {
+        return response()->json($e);
+    }
     }
 
     public function store(CreateSessionRequest $request, Session $session)
