@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class LoginMentorRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class LoginMentorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +20,34 @@ class LoginMentorRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+
+     public function rules(): array
     {
         return [
-            //
+            'email'=>'required|email',
+            'password'=>'required'
+        ];
+    }
+
+    public function failedValidation(validator $validator ){
+        throw new HttpResponseException(response()->json([
+            'success'=>false,
+            'status_code'=>422,
+            'error'=>true,
+            'message'=>'erreur de validation',
+            'errorList'=>$validator->errors()
+        ]));
+    }
+
+    public function messages(){
+        return [
+            'email.required'=>'l\'email est requis',
+            'email.exists'=>'l\'email n\'existe pas dans notre base de données',
+            'email.email'=>'format email invalide',
+            'password.required'=>'le mot de passe est requis'
+
         ];
     }
 }
+
+
