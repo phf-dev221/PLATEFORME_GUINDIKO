@@ -28,8 +28,7 @@ class EditArticleRequest extends FormRequest
             'description' => 'required',
             'debouche' => 'required',
             'date_publication' => 'required|date',
-            // 'image' => 'required|image',
-            // 'image' => 'required|image|max:10000|mimes:jpeg,png,jpg',
+            'image' => 'sometimes|image',
         ];
     }
 
@@ -47,7 +46,7 @@ class EditArticleRequest extends FormRequest
     {
         return [
             'libelle.required'=>'le libelle doit être fourni',
-            'decription.required'=>'la description doit être fourni',
+            'description.required'=>'la description doit être fourni',
             'debouche.required'=>'le debouche doit être fourni',
             'date_publication.required' => 'la date est requis',
             'image.required'=>'l\'image doit être fourni',
