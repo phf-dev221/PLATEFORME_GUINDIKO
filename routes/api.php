@@ -36,6 +36,7 @@ Route::get('evenement/EvenementArchive', [EvenementController::class, 'Evenement
 
 //Pour les articles
 Route::get('articles', [ArticleController::class, 'index']);
+Route::put('articles/archives/{article}', [ArticleController::class, 'archive']);
 Route::get('articlesArchives', [ArticleController::class, 'articlesArchives']);
 Route::post('articles/create', [ArticleController::class, 'store']);
 Route::put('articles/edit/{article}', [ArticleController::class, 'update']);
