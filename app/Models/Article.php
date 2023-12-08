@@ -13,4 +13,15 @@ class Article extends Model
     {
         return $this->hasMany(Mentor::class);
     }
+    protected $fillable = [
+        'libelle',
+        'description',
+        'debouche',
+        'date_publication',
+        'image',
+        'est_archive',
+    ];
+
+
+    
 }
