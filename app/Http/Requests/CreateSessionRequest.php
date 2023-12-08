@@ -46,7 +46,6 @@ class CreateSessionRequest extends FormRequest
     public function messages()
     {
         return[
-
             "mentors_id.required" => "Le mentor est obligatoire",
             "users_id.required" => "Le mentor est obligatoire",
             "theme.required" => "Le theme ne peut pas être null",
