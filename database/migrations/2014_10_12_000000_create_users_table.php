@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('telephone');
             $table->enum('statut', ['eleve', 'etudiant', 'professionnel', 'jeune_diplome']);
-            $table->string('role')->defaul('user');
+            $table->string('role')->default('user');
             $table->boolean('est_archive')->default(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

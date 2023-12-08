@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\articles;
+namespace App\Http\Controllers\Api;
 
 use Exception;
 use App\Models\User;

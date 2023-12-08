@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('telephone');
             $table->string('photo_profil');
             $table->integer('nombre_annee_experience');
-            $table->integer('nombre_mentores')->limit(15);
+            $table->integer('nombre_mentores')->limit(15)->default(0);
             $table->string('role')->default('mentor');
             $table->boolean('est_archive')->default(false);
             $table->string('email')->unique();

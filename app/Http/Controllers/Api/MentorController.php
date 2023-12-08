@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api\articles;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Mentor;
 use Exception;
+use App\Models\Mentor;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\LoginMentorRequest;
 use App\Http\Requests\RegisterMentorRequest;
+use App\Models\User;
 
 class MentorController extends Controller
 {
@@ -22,6 +23,7 @@ class MentorController extends Controller
             $user->telephone = $request->telephone;
             $user->nombre_annee_experience = $request->nombre_annee_experience;
             $user->email = $request->email;
+            $user->articles_id = $request->articles_id;
             $user->password = Hash::make($request->password);
 
             if ($request->hasFile('photo_profil')) {
@@ -80,7 +82,6 @@ class MentorController extends Controller
     public function logout()
     {
         try {
-            dd(Auth::user()->check());
             if (Auth::guard('mentor')->check()){
                 Auth::guard('mentor')->logout();
     
@@ -108,7 +109,6 @@ class MentorController extends Controller
 
     }
     
-   
     public function index()
     {
         try {
@@ -163,7 +163,7 @@ class MentorController extends Controller
                     return response()->json([
                         'status_code' => 200,
                         'status_message' => 'Voici la liste des mentors qui n\'ont pas atteint la limite et qui ne sont pas archivés',
-                        'mentor' => Mentor::where('nombre_mentores'< 16),
+                        'mentor' => Mentor::where('nombre_mentores','<', 16)->get(),
                     ]); 
                 }
             }
@@ -181,7 +181,7 @@ class MentorController extends Controller
                     return response()->json([
                         'status_code' => 200,
                         'status_message' => 'Voici la liste des mentors qui n\'ont pas atteint la limite et qui ne sont pas archivés',
-                        'mentor' => Mentor::where('nombre_mentores' > 16),
+                        'mentor' => Mentor::where('nombre_mentores' ,'>', 16)->get(),
                     ]); 
                 }
             }
