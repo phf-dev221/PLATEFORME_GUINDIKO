@@ -13,4 +13,14 @@ class Evenement extends Model
     {
         return $this->hasMany(Evenement_Mentor::class);
     }
+
+    protected $fillable = [
+        "libelle",
+        "description",
+        "lieu",
+        "image",
+        "date_evenement",
+        "heure_evenement",
+        "est_archive"
+    ];
 }
