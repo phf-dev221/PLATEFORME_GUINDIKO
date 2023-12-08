@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MentorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ArticleController;
@@ -47,6 +48,28 @@ Route::get('articlesArchives', [ArticleController::class, 'articlesArchives']);
 Route::post('articles/create', [ArticleController::class, 'store']);
 Route::put('articles/edit/{article}', [ArticleController::class, 'update']);
 Route::delete('articles/{article}', [ArticleController::class, 'destroy']);
+
+
+// Pour les mentors
+Route::get('mentor', [MentorController::class, 'index']);
+Route::get('mentor/nonArchive', [MentorController::class, 'non_archive']);
+Route::get('mentor/estArchive', [MentorController::class, 'est_archive']);
+Route::get('mentor/nombreMentor', [MentorController::class, 'nombre_mentor']);
+Route::get('mentor/nombreMentorAtteint', [MentorController::class, 'nombre_mentor_atteint']);
+Route::put('mentor/archive/{mentor}', [MentorController::class, 'archive']);
+
+
+
+
+// Pour les mentors
+Route::get('mentor', [MentorController::class, 'index']);
+Route::get('mentor/nonArchive', [MentorController::class, 'non_archive']);
+Route::get('mentor/estArchive', [MentorController::class, 'est_archive']);
+Route::get('mentor/nombreMentor', [MentorController::class, 'nombre_mentor']);
+Route::get('mentor/nombreMentorAtteint', [MentorController::class, 'nombre_mentor_atteint']);
+Route::put('mentor/archive/{mentor}', [MentorController::class, 'archive']);
+
+
 
 
 /*routes auth*/
