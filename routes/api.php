@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//Pour les sessions 
+Route::get('session', [SessionController::class, 'index']);
+Route::post('session/create', [SessionController::class, 'store']);
+Route::put('session/edit/{session}', [SessionController::class, 'update']);
+Route::delete('session/{session}', [SessionController::class, 'destroy']);

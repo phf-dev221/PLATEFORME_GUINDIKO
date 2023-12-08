@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateSessionRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class CreateSessionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,33 @@ class CreateSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "lieu" => "sometimes",
+            "mentors_id" => "required",
+            "users_id" => "required",
+            "en_ligne" =>"sometimes",
+            "theme" => "required",
+            "libelle" => "required",
+        ];
+    }
+
+    public function failedValidation(Validator $validator ){
+        throw new HttpResponseException(response()->json([
+            'success'=>false,
+            'status_code'=>422,
+            'error'=>true,
+            'message'=>'erreur de validation',
+            'errorList'=>$validator->errors()
+        ]));
+    }
+
+    public function messages()
+    {
+        return[
+
+            "mentors_id.required" => "Le mentor est obligatoire",
+            "users_id.required" => "Le mentor est obligatoire",
+            "theme.required" => "Le theme ne peut pas être null",
+            "libelle.required" => "Le libelle ne peut pas être null"
         ];
     }
 }

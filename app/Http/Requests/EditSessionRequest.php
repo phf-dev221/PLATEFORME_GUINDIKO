@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Dotenv\Validator;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class EditSessionRequest extends FormRequest
 {
@@ -11,7 +14,7 @@ class EditSessionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +25,29 @@ class EditSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "date_evenement" => "required|date",
+            "lieu" => "required",
+            "theme_evenement" => "required"
+        ];
+    }
+
+    public function failedValidation(ValidationValidator $validator ){
+        throw new HttpResponseException(response()->json([
+            'success'=>false,
+            'status_code'=>422,
+            'error'=>true,
+            'message'=>'erreur de validation',
+            'errorList'=>$validator->errors()
+        ]));
+    }
+
+    public function messages()
+    {
+        return[
+
+            "date_evenement.required" => "La date est obligatoire",
+            "lieu.required" => "Le lieu ne peut pas être null",
+            "theme_evenement" => "Le théme ne peut pas être null"
         ];
     }
 }
