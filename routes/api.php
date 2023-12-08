@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\EvenementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
