@@ -29,7 +29,7 @@ class RegisterMentorRequest extends FormRequest
             'password'=>'required|regex:/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!])(.{8,})$/',
             'telephone' =>'required|regex:/^7[0-9]{8}$/|unique:mentors,telephone',
             'nombre_annee_experience'=>'required',
-            'articles_id' => 'required',
+            // 'articles_id' => 'required',
         ];
     }
 

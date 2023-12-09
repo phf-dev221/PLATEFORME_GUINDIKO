@@ -33,7 +33,7 @@ class MentorController extends Controller
             $user->telephone = $request->telephone;
             $user->nombre_annee_experience = $request->nombre_annee_experience;
             $user->email = $request->email;
-            $user->articles_id = $request->articles_id;
+            // $user->articles_id = $request->articles_id;
             $user->password = Hash::make($request->password);
 
             if ($request->hasFile('photo_profil')) {
