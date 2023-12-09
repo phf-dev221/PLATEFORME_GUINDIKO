@@ -27,7 +27,7 @@ class User extends Authenticatable
         'telephone',
         'statut',
         'role',
-        'est_archive',
+        'is_archived',
         'email',
         'password',
     ];

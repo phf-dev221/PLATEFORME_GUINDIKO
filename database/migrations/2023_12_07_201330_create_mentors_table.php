@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('nombre_annee_experience');
             $table->integer('nombre_mentores')->limit(15)->default(0);
             $table->string('role')->default('mentor');
-            $table->boolean('est_archive')->default(false);
+            $table->boolean('is_archived')->default(false);
             $table->string('email')->unique();
             $table->string('password');
             $table->unsignedBigInteger('articles_id');

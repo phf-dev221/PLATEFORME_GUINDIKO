@@ -55,13 +55,35 @@ Route::put('mentor/archive/{mentor}', [MentorController::class, 'archive']);
 //Route d'inscription et de connexion pour les users
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
+Route::get('filterUsersByName', [UserController::class, 'filterUsersByName']);
+
+Route::put('updateUser/{user}', [UserController::class, 'updateUser']);
+
+Route::get('showUser/{user}', [UserController::class, 'showUser']);
+Route::get('indexUser', [UserController::class, 'index']);
+Route::get('mentoreNonArchive', [UserController::class, 'mentoreNonArchive']);
+Route::get('mentoreArchive', [UserController::class, 'mentoreArchive']);
+Route::put('user/archive/{user}', [UserController::class, 'archive']);
+
+Route::post('verifMail/user', [UserController::class, 'verifMailUser']);
+Route::post('resetPassword/mentor/{user}', [UserController::class, 'resetPasswordUser']);
+
+
+
+
+
 //ROute d'inscription, connexion et de deconnexion des mentors
 Route::post('login', [MentorController::class, 'login']);
 Route::post('registerMentor', [MentorController::class, 'registerMentor']);
+/*filtrage mentors*/
+Route::get('filterMentorsByName', [MentorController::class, 'filterMentorsByName']);
+Route::post('verifMail/mentor', [MentorController::class, 'verifMailMentor']);
+Route::post('resetPassword/mentor/{mentor}', [MentorController::class, 'resetPasswordMentor']);
 
-Route::middleware(['auth:sanctum', 'acces:mentor'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     /*routes d'acces pour mentors*/
-Route::post('logout', [MentorController::class, 'logout']);
+    Route::post('logout', [MentorController::class, 'logout']);
+
     Route::post('session/create', [SessionController::class, 'store']);
     Route::get('session', [SessionController::class, 'index']);
     Route::put('session/edit/{session}', [SessionController::class, 'update']);
