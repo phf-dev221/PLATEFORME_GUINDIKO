@@ -40,28 +40,6 @@ class UserController extends Controller
     
         }
 
-        // public function login(LoginMentoreRequest $request){
-
-        //     if(auth()->attempt($request->only(['email','password']))){
-        //         $user = auth()->user();
-        //         $token = $user->createToken('cle_secret_pour_le_back')->plainTextToken;
-    
-        //         return response()->json([
-        //             'status_code'=>200,
-        //             'status_message'=>'utilisateur connecté',
-        //             'status_body'=>$user,
-        //             'token'=>$token
-        //         ]);
-        //     }
-        //     else{
-                
-        //         return response()->json([
-        //             'status_code'=>403,
-        //             'status_message'=>'Identifiants non valides',
-    
-        //         ]);
-        //     }
-        // }
 
         public function logoutUser(){
             if(auth()->check()){
