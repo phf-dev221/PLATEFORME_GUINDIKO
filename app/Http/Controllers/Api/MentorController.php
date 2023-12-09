@@ -79,33 +79,51 @@ class MentorController extends Controller
         }
     }
 
-    public function logout()
-    {
-        try {
-            if (Auth::guard('mentor')->check()){
-                Auth::guard('mentor')->logout();
+    // public function logout()
+    // {
+    //     try {
+    //         if (Auth::guard('mentor')->check()){
+    //             Auth::guard('mentor')->logout();
     
-                return response()->json([
-                    'status' => 200,
-                    'success' => true,
-                    'status_message' => 'Déconnexion réussie'
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 401,
-                    'success' => false,
-                    'status_message' => 'Aucun utilisateur connecté'
-                ]);
-            }
+    //             return response()->json([
+    //                 'status' => 200,
+    //                 'success' => true,
+    //                 'status_message' => 'Déconnexion réussie'
+    //             ]);
+    //         } else {
+    //             return response()->json([
+    //                 'status' => 401,
+    //                 'success' => false,
+    //                 'status_message' => 'Aucun utilisateur connecté'
+    //             ]);
+    //         }
         
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 500,
-                'success' => false,
-                'status_message' => 'Erreur lors de la déconnexion',
-                'errors'=>$e
-            ]);
-        }
+    //     } catch (Exception $e) {
+    //         return response()->json([
+    //             'status' => 500,
+    //             'success' => false,
+    //             'status_message' => 'Erreur lors de la déconnexion',
+    //             'errors'=>$e
+    //         ]);
+    //     }
+
+    // }
+
+    public function logout(){
+        if(Auth::guard('mentor')->user()){
+        Auth::guard('mentor')->tokens()->delete();
+        session()->invalidate();
+        session()->regenerateToken();
+        return response()->json([
+            'status_code'=>200,
+            "status_body"=>"deconnexion reussie"
+        ]);
+    }else{
+        return response()->json([
+            'status_code'=>401,
+            "status_body"=>"deconnexion échouée"
+        ]); 
+    }
 
     }
     
