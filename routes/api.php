@@ -82,7 +82,6 @@ Route::post('resetPassword/mentor/{mentor}', [MentorController::class, 'resetPas
 
 Route::middleware(['auth:sanctum'])->group(function () {
     /*routes d'acces pour mentors*/
-    Route::post('logout', [MentorController::class, 'logout']);
 
     Route::post('session/create', [SessionController::class, 'store']);
     Route::get('session', [SessionController::class, 'index']);
@@ -103,3 +102,10 @@ Route::middleware(['auth:sanctum', 'acces:admin'])->group(function () {
     Route::put('evenement/edit/{evenement}', [EvenementController::class, 'update']);
     Route::delete('evenement/{evenement}', [EvenementController::class, 'destroy']);
 });
+
+Route::middleware(['auth:sanctum', 'acces:mentor'])->group(function () {
+    /*routes d'acces pour mentors*/
+ Route::post('logout', [MentorController::class, 'logout']);
+
+});
+

@@ -21,10 +21,10 @@ class MentorController extends Controller
 
     public function registerMentor(RegisterMentorRequest $request)
     {
-        $data = [
-            'nom' => $request->nom,
-            'email' => $request->email,
-        ];
+        // $data = [
+        //     'nom' => $request->nom,
+        //     'email' => $request->email,
+        // ];
 
         try {
             $user = new Mentor();
@@ -44,13 +44,14 @@ class MentorController extends Controller
             }
 
             if($user->save()){
-             Mail::to($user->email)->send(new MentorMail($data));   
-            }
+            //  Mail::to($user->email)->send(new MentorMail($data));   
+            
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'utilisateur ajouté avec succes',
                 'status_body' => $user
             ]);
+        }
 
         } catch (Exception $e) {
             return response()->json([$e]);
