@@ -57,14 +57,19 @@ class SessionController extends Controller
     }
     }
 
-    public function store(CreateSessionRequest $request, Session $session)
+    public function store(Request $request)
     {
-        dd($request);
+
+        $session = new Session();
+
         try {
             // dd(Auth::user());
-            $session->users_id = $request->users_id;
-            $session->mentors_id = Auth::guard('mentor')->user();
-            $session->theme = $request->theme;
+            // dd(auth()->user()->id);
+            $session->user_id = $request->user_id;
+            $session->mentor_id = auth()->user()->id;
+            $session->theme_evenement = $request->theme_evenement;
+            $session->date_evenement = $request->date_evenement;
+            $session->lieu =$request->lieu;
             $session->save();
             return response()->json([
                 'status_code' => 200,

@@ -24,11 +24,11 @@ class CreateSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "mentors_id" => "required",
-            "users_id" => "required",
-            "en_ligne" =>"required",
-            "theme" => "required",
-            "libelle" => "required",
+            "mentor_id" => "required",
+            "user_id" => "required",
+            // "en_ligne" =>"required",
+            // "theme_evenement" => "required",
+            // "libelle" => "required",
         ];
     }
 
@@ -45,8 +45,8 @@ class CreateSessionRequest extends FormRequest
     public function messages()
     {
         return[
-            "mentors_id.required" => "Id mentor est obligatoire",
-            "users_id.required" => "L'utilisateur est obligatoire",
+            "mentor_id.required" => "Id mentor est obligatoire",
+            "user_id.required" => "L'utilisateur est obligatoire",
             "theme.required" => "Le theme ne peut pas être null",
             "en_ligne.required" => "le champ en ligne ne peut pas être null",
             "libelle.required" => "Le libelle ne peut pas être null"
